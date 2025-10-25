@@ -6,7 +6,8 @@
     <title>ADA Students Union (ADASU) National Official Website | Empowering Community Growth</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
@@ -17,35 +18,336 @@
             --dark: #2c3e50;
             --gold: #f1c40f;
             --sidebar-width: 300px;
+            --bg-color: #f9f9f9;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --header-bg: linear-gradient(135deg, #2c3e50, #1a2530);
+            --footer-bg: linear-gradient(135deg, #2c3e50, #1a2530);
+            --section-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --font-primary: 'Inter', sans-serif;
+            --font-heading: 'Playfair Display', serif;
+            --font-accent: 'Merriweather', serif;
+            --text-muted: #6c757d;
         }
-        
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a; /* Lighter dark background */
+            --text-color: #f0f0f0; /* Brighter text */
+            --card-bg: #2d2d2d; /* Lighter cards */
+            --header-bg: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --footer-bg: linear-gradient(135deg, #0d1b2a, #1b263b);
+            --light: #3d3d3d;
+            --section-bg: #222222; /* Lighter section background */
+            --border-color: #444444;
+            --shadow: 0 10px 30px rgba(0,0,0,0.3);
+            --text-muted: #b0b0b0; /* Brighter muted text */
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f9f9f9;
-            color: var(--dark);
+            font-family: var(--font-primary);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             overflow-x: hidden;
-            transition: margin-left 0.5s ease;
+            transition: margin-left 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+            line-height: 1.7;
         }
-        
-        /* Sidebar Styles - Updated to cover entire site */
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: var(--text-color);
+        }
+
+        .lead {
+            font-family: var(--font-accent);
+            font-weight: 300;
+            font-size: 1.25rem;
+            color: var(--text-color);
+        }
+
+        p {
+            color: var(--text-color);
+        }
+
+        /* Enhanced Dark/Light Mode Toggle with Door Animation */
+        .theme-toggle-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1002;
+            perspective: 1000px;
+        }
+
+        .theme-toggle {
+            position: relative;
+            width: 80px;
+            height: 120px;
+            cursor: pointer;
+        }
+
+        .light-switch-box {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 100px;
+            background: linear-gradient(145deg, #8B4513, #A0522D);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .door {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #654321, #8B4513);
+            border-radius: 8px;
+            transform-origin: left;
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+
+        .door.open {
+            transform: rotateY(-80deg);
+        }
+
+        .door-handle {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 8px;
+            height: 20px;
+            background: #D4AF37;
+            border-radius: 4px;
+            transform: translateY(-50%);
+        }
+
+        .switch-container {
+            position: absolute;
+            top: 30px;
+            left: 15px;
+            width: 30px;
+            height: 50px;
+            background: #2c3e50;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 0;
+            z-index: 1;
+        }
+
+        .switch {
+            width: 20px;
+            height: 20px;
+            background: #f1c40f;
+            border-radius: 50%;
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.7);
+        }
+
+        .switch.off {
+            transform: translateY(30px);
+            background: #7a7a7a;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+
+        .hand {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background: #f5d0b5;
+            border-radius: 20px 20px 10px 10px;
+            top: 30px;
+            right: -30px;
+            transform: translateX(100px);
+            transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hand.active {
+            transform: translateX(0);
+        }
+
+        .finger {
+            width: 6px;
+            height: 20px;
+            background: #f5d0b5;
+            border-radius: 3px;
+            position: absolute;
+            top: 10px;
+        }
+
+        .finger-1 { right: 10px; transform: rotate(10deg); }
+        .finger-2 { right: 17px; }
+        .finger-3 { right: 24px; }
+        .finger-4 { right: 31px; transform: rotate(-10deg); }
+
+        .light-bulb {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #f1c40f;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(241, 196, 15, 0.7);
+            transition: all 0.5s ease;
+        }
+
+        .light-bulb.off {
+            background: #7a7a7a;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+
+        /* Enhanced Button Styles */
+        .btn-union {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-family: var(--font-primary);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transform: translateZ(0);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-union:hover {
+            background: var(--accent);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-union:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-union::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s;
+        }
+
+        .btn-union:hover::before {
+            left: 100%;
+        }
+
+        .btn-union::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .btn-union:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Card Styles */
+        .card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] .card:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .card-body {
+            color: var(--text-color);
+        }
+
+        .card-title {
+            color: var(--text-color);
+        }
+
+        .card-text {
+            color: var(--text-color);
+        }
+
+        /* Enhanced Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+            background-color: var(--section-bg);
+            transition: background-color 0.5s ease;
+        }
+
+        .section-alt {
+            background-color: var(--bg-color);
+        }
+
+        /* Enhanced Sidebar Styles */
         .sidebar {
             height: 100vh;
             width: 100%;
             position: fixed;
             top: 0;
             left: -100%;
-            background: linear-gradient(180deg, var(--primary), #1a2530);
+            background: var(--header-bg);
             color: white;
             z-index: 1000;
             overflow-y: auto;
             transition: left 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             box-shadow: 5px 0 15px rgba(0,0,0,0.1);
         }
-        
+
         .sidebar.active {
             left: 0;
         }
-        
+
         .sidebar-header {
             padding: 30px 20px 20px;
             text-align: center;
@@ -53,7 +355,7 @@
             margin-bottom: 20px;
             position: relative;
         }
-        
+
         .sidebar-close {
             position: absolute;
             top: 20px;
@@ -64,8 +366,20 @@
             font-size: 1.5rem;
             cursor: pointer;
             z-index: 1001;
+            transition: transform 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
+
+        .sidebar-close:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.1);
+        }
+
         .sidebar-logo {
             width: 120px;
             height: 120px;
@@ -75,76 +389,84 @@
             margin-bottom: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        
+
         .sidebar-title {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0;
+            font-family: var(--font-heading);
+            color: white;
         }
-        
+
         .sidebar-menu {
             list-style: none;
             padding: 0;
             margin: 0;
         }
-        
+
         .sidebar-menu li {
             margin-bottom: 5px;
         }
-        
+
         .sidebar-menu a {
             display: block;
-            padding: 12px 20px;
-            color: rgba(255,255,255,0.8);
+            padding: 14px 20px;
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
             transition: all 0.3s ease;
             border-left: 3px solid transparent;
+            cursor: pointer;
+            font-family: var(--font-primary);
+            font-weight: 500;
         }
-        
+
         .sidebar-menu a:hover, .sidebar-menu a.active {
             background: rgba(255,255,255,0.1);
             color: white;
             border-left: 3px solid var(--secondary);
             padding-left: 25px;
         }
-        
+
         .sidebar-menu i {
             width: 25px;
             text-align: center;
             margin-right: 10px;
         }
-        
+
         .sidebar-content {
             padding: 20px;
             display: none;
         }
-        
+
         .sidebar-content.active {
             display: block;
             animation: fadeIn 0.5s ease;
         }
-        
+
         .sidebar-section-title {
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-family: var(--font-heading);
+            color: white;
         }
-        
+
         .sidebar-executive-card {
             background: rgba(255,255,255,0.05);
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 15px;
             margin-bottom: 15px;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
-        
+
         .sidebar-executive-card:hover {
             background: rgba(255,255,255,0.1);
             transform: translateX(5px);
         }
-        
+
         .sidebar-executive-img {
             width: 60px;
             height: 60px;
@@ -154,18 +476,25 @@
             margin-right: 15px;
             border: 2px solid var(--secondary);
         }
-        
+
         .sidebar-executive-name {
             font-weight: 600;
             margin-bottom: 5px;
+            font-family: var(--font-primary);
+            color: white;
         }
-        
+
         .sidebar-executive-role {
             font-size: 0.85rem;
             color: var(--secondary);
             margin-bottom: 5px;
+            font-family: var(--font-primary);
         }
-        
+
+        .sidebar-executive-card small {
+            color: rgba(255,255,255,0.7);
+        }
+
         /* Sidebar Toggle Button */
         .sidebar-toggle {
             position: fixed;
@@ -184,13 +513,14 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
+            font-size: 1.2rem;
         }
-        
+
         .sidebar-toggle:hover {
             background: var(--secondary);
             transform: scale(1.1);
         }
-        
+
         /* Overlay for sidebar */
         .sidebar-overlay {
             position: fixed;
@@ -204,21 +534,21 @@
             visibility: hidden;
             transition: all 0.3s ease;
         }
-        
+
         .sidebar-overlay.active {
             opacity: 1;
             visibility: visible;
         }
-        
+
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--dark));
+            background: var(--header-bg);
             color: white;
             position: relative;
             overflow: hidden;
-            padding: 100px 0;
+            padding: 120px 0;
         }
-        
+
         /* Particle Background */
         .particles {
             position: absolute;
@@ -228,8 +558,8 @@
             height: 100%;
             z-index: 0;
         }
-        
-        /* Logo Styles - Moved to the left */
+
+        /* Logo Styles */
         .logo-container {
             position: relative;
             z-index: 2;
@@ -240,7 +570,7 @@
             justify-content: flex-start;
             text-align: left;
         }
-        
+
         .logo-img {
             width: 300px;
             height: 280px;
@@ -248,163 +578,177 @@
             border: 3px solid white;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: all 0.5s ease;
+            border-radius: 50%;
         }
-        
+
         .header-content {
             text-align: left;
             padding-left: 30px;
         }
-        
-        /* Executive Cards - Removed from main page */
-        .executive-card {
-            display: none; /* Executives moved to sidebar */
-        }
-        
-        /* Outreach Gallery */
-        .outreach-card {
-            transition: all 0.3s ease;
-            border-radius: 15px;
-            overflow: hidden;
-            height: 100%;
-        }
-        
-        .outreach-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-        
-        /* Contact Form - Stationary */
-        .contact-form-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .contact-form-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-        
-        /* Section Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animated-section {
-            animation: fadeInUp 1s ease-out forwards;
-        }
-        
-        /* Button Styles */
-        .btn-union {
-            background: var(--secondary);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+
+        /* Outreach Gallery - Carousel Style */
+        .outreach-container {
             position: relative;
             overflow: hidden;
+            padding: 20px 0;
         }
-        
-        .btn-union:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+
+        .outreach-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            touch-action: pan-y;
         }
-        
-        .btn-union:active {
-            transform: translateY(0);
+
+        .outreach-item {
+            flex: 0 0 33.333%;
+            padding: 0 15px;
+            transition: transform 0.3s ease;
         }
-        
-        .btn-union::after {
-            content: '';
+
+        @media (max-width: 992px) {
+            .outreach-item {
+                flex: 0 0 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .outreach-item {
+                flex: 0 0 100%;
+            }
+        }
+
+        .outreach-card {
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 100%;
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+        }
+
+        .outreach-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        [data-theme="dark"] .outreach-card:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .outreach-nav {
             position: absolute;
             top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-        
-        .btn-union:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-        
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(20, 20);
-                opacity: 0;
-            }
-        }
-        
-        /* Logo Animation Only */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        /* Super Transparent Particles */
-        .particle {
-            position: absolute;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
         }
-        
-        /* Contact Form */
-        .contact-form .form-control {
-            border-radius: 10px;
-            padding: 15px;
-            border: 2px solid #eee;
+
+        .outreach-nav:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .outreach-prev {
+            left: 10px;
+        }
+
+        .outreach-next {
+            right: 10px;
+        }
+
+        .outreach-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .outreach-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            margin: 0 5px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
+        .outreach-indicator.active {
+            background: var(--secondary);
+            transform: scale(1.2);
+        }
+
+        /* Contact Form */
+        .contact-form-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            background: var(--card-bg);
+            overflow: hidden;
+        }
+
+        .contact-form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] .contact-form-card:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .contact-form .form-control {
+            border-radius: 12px;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            background: var(--card-bg);
+            color: var(--text-color);
+            font-family: var(--font-primary);
+        }
+
         .contact-form .form-control:focus {
             border-color: var(--secondary);
             box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
         }
-        
+
         /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--dark), var(--primary));
+            background: var(--footer-bg);
             color: white;
             position: relative;
-            padding: 60px 0 120px;
+            padding: 80px 0 120px;
         }
-        
-        /* Developer Attribution - Simplified */
+
+        /* Developer Attribution */
         .developer-attribution {
             text-align: center;
             padding: 20px 0;
             margin-top: 40px;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
-        
+
         .developer-name {
             font-size: 1rem;
             margin-bottom: 5px;
+            font-family: var(--font-primary);
+            color: white;
         }
-        
+
         /* Social Icons */
         .social-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -413,160 +757,304 @@
             margin: 0 5px;
             transition: all 0.3s ease;
             color: white;
+            cursor: pointer;
+            font-size: 1.1rem;
         }
-        
+
         .social-icon:hover {
             background: var(--secondary);
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.1);
         }
-        
-        /* Section Spacing */
-        section {
-            padding: 80px 0;
-            position: relative;
-        }
-        
-        /* Enhanced Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                left: -100%;
-            }
-            
-            .sidebar-toggle {
-                top: 10px;
-                left: 10px;
-                width: 40px;
-                height: 40px;
-            }
-            
-            .logo-img {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .logo-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .header-content {
-                padding-left: 0;
-                text-align: center;
-                margin-top: 20px;
-            }
-            
-            header {
-                padding: 60px 0;
-            }
-            
-            section {
-                padding: 50px 0;
-            }
-            
-            .outreach-card {
-                margin-bottom: 20px;
-            }
-            
-            .contact-form-card {
-                margin-top: 20px;
-            }
-        }
-        
-        /* Animation for sidebar content */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        /* Enhanced Visual Elements */
+
+        /* Separator */
         .separator {
-            height: 3px;
+            height: 4px;
             width: 100px;
             background: var(--secondary);
             margin: 0 auto 20px;
+            border-radius: 2px;
         }
-        
-        .card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
+
+        /* Icon Container */
         .icon-container {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             background: rgba(52, 152, 219, 0.1);
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 15px;
-        }
-        
-        /* Enhanced Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .lead {
-            font-size: 1.25rem;
-            font-weight: 300;
-        }
-        
-        /* Improved spacing */
-        .mb-section {
-            margin-bottom: 80px;
-        }
-        
-        /* Enhanced form styling */
-        .form-control {
-            border-radius: 10px;
-            padding: 15px;
-            border: 2px solid #eee;
             transition: all 0.3s ease;
         }
-        
-        .form-control:focus {
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+
+        .icon-container:hover {
+            transform: scale(1.1);
+            background: rgba(52, 152, 219, 0.2);
         }
-        
-        /* Enhanced button styling */
-        .btn {
-            border-radius: 50px;
-            padding: 12px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
+
         /* Loading animation for form submission */
         .form-loading {
             display: none;
             text-align: center;
             padding: 10px;
         }
-        
+
         .form-success {
             display: none;
             text-align: center;
             padding: 10px;
             color: #28a745;
         }
-        
+
         .form-error {
             display: none;
             text-align: center;
             padding: 10px;
             color: #dc3545;
         }
+
+        /* Logo Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Animation for sidebar content */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Section Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated-section {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        /* Super Transparent Particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                left: -100%;
+            }
+
+            .sidebar-toggle {
+                top: 15px;
+                left: 15px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .logo-img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-content {
+                padding-left: 0;
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            header {
+                padding: 80px 0;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .outreach-card {
+                margin-bottom: 20px;
+            }
+
+            .contact-form-card {
+                margin-top: 20px;
+            }
+
+            .theme-toggle-container {
+                top: 15px;
+                right: 15px;
+            }
+
+            .theme-toggle {
+                transform: scale(0.8);
+                transform-origin: top right;
+            }
+
+            .btn-union {
+                padding: 12px 24px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .theme-toggle {
+                transform: scale(0.7);
+            }
+            
+            .outreach-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                margin: 0 3px;
+            }
+        }
+
+        /* TEXT VISIBILITY FIXES FOR DARK MODE */
+        [data-theme="dark"] .text-muted {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .bg-light {
+            background-color: var(--section-bg) !important;
+        }
+
+        [data-theme="dark"] .bg-white {
+            background-color: var(--card-bg) !important;
+        }
+
+        [data-theme="dark"] .card-footer.bg-white {
+            background-color: var(--card-bg) !important;
+        }
+
+        [data-theme="dark"] .form-control {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .form-control:focus {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+        [data-theme="dark"] .card-footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] .card-footer small {
+            color: var(--text-muted);
+        }
+
+        [data-theme="dark"] .outreach-card .card-body small {
+            color: var(--text-muted);
+        }
+
+        [data-theme="dark"] .contact-form-card a {
+            color: var(--secondary);
+        }
+
+        [data-theme="dark"] footer a {
+            color: rgba(255,255,255,0.8);
+        }
+
+        [data-theme="dark"] footer a:hover {
+            color: white;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
     </style>
+
+    
 </head>
 <body>
+    <!-- Enhanced Dark/Light Mode Toggle with Door Animation -->
+    <div class="theme-toggle-container">
+        <div class="theme-toggle" id="themeToggle">
+            <div class="light-switch-box">
+                <div class="door" id="door">
+                    <div class="door-handle"></div>
+                </div>
+                <div class="switch-container">
+                    <div class="switch" id="switch"></div>
+                </div>
+                <div class="hand" id="hand">
+                    <div class="finger finger-1"></div>
+                    <div class="finger finger-2"></div>
+                    <div class="finger finger-3"></div>
+                    <div class="finger finger-4"></div>
+                    <div class="finger finger-5"></div>
+                </div>
+            </div>
+            <div class="light-bulb" id="lightBulb"></div>
+        </div>
+    </div>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Rest of the HTML remains the same but with improved classes for dark mode compatibility -->
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
@@ -598,7 +1086,7 @@
                     <small>Accra Technical University (ATU)</small>
                 </div>
             </div>
-            
+
             <div class="sidebar-executive-card">
                 <img src="images/Vice_President.jpg" alt="Vice President" class="sidebar-executive-img">
                 <div>
@@ -694,8 +1182,11 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Vision Content -->
+            
+            <!-- Other executive cards remain the same -->
+            <!-- ... -->
+            
+                <!-- Vision Content -->
         <div class="sidebar-content" id="vision">
             <h4 class="sidebar-section-title">Our Vision</h4>
             <!-- REPLACE THIS CONTENT WITH YOUR VISION -->
@@ -781,10 +1272,6 @@
     <div class="particles" id="particles-js"></div>
     <div id="custom-particles"></div>
     
-    <!-- Floating Particles Background -->
-    <div class="particles" id="particles-js"></div>
-    <div id="custom-particles"></div>
-    
     <!-- Header Section -->
     <header class="position-relative">
         <div class="container">
@@ -801,33 +1288,38 @@
     </header>
 
     <!-- About Section -->
-    <section id="about" class="bg-white">
+    <section id="about" class="section-alt">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <h2 class="display-5 fw-bold mb-4">About ADASU</h2>
                     <div class="separator mx-auto mb-4"></div>
-                    <!-- REPLACE THIS CONTENT WITH YOUR ABOUT INFORMATION -->
                     <p class="lead">The ADA Students Union is the official representative body for all students at tertiary institutions in Ghana. We work tirelessly to ensure students' welfare, organize events, and serve as the bridge between students and a robust future.</p>
                     <div class="mt-5">
                         <div class="row g-4">
                             <div class="col-md-4">
-                                <div class="p-4 rounded shadow-sm bg-light h-100">
-                                    <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                                <div class="p-4 rounded shadow-sm h-100 card">
+                                    <div class="icon-container">
+                                        <i class="fas fa-users fa-2x text-primary"></i>
+                                    </div>
                                     <h4>Community</h4>
                                     <p>Building strong connections among students</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="p-4 rounded shadow-sm bg-light h-100">
-                                    <i class="fas fa-hand-holding-heart fa-3x mb-3 text-primary"></i>
+                                <div class="p-4 rounded shadow-sm h-100 card">
+                                    <div class="icon-container">
+                                        <i class="fas fa-hand-holding-heart fa-2x text-primary"></i>
+                                    </div>
                                     <h4>Support</h4>
                                     <p>Advocating for student welfare and needs</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="p-4 rounded shadow-sm bg-light h-100">
-                                    <i class="fas fa-graduation-cap fa-3x mb-3 text-primary"></i>
+                                <div class="p-4 rounded shadow-sm h-100 card">
+                                    <div class="icon-container">
+                                        <i class="fas fa-graduation-cap fa-2x text-primary"></i>
+                                    </div>
                                     <h4>Growth</h4>
                                     <p>Fostering academic and personal development</p>
                                 </div>
@@ -840,70 +1332,86 @@
     </section>
 
     <!-- Recent Outreaches Section -->
-    <section id="outreaches" class="bg-light">
+    <section id="outreaches">
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-8 text-center">
                     <h2 class="display-5 fw-bold">Our Recent Outreach Programs</h2>
                     <div class="separator mx-auto mb-4"></div>
-                    <p>Capturing moments from our impactful community engagement programs</p>
+                    <p class="lead">Capturing moments from our impactful community engagement programs</p>
                 </div>
             </div>
             
-            <div class="row g-4">
-                <!-- Outreach 1 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="outreach-card card h-100">
-                        <img src="images/1.jpg" class="card-img-top" alt="Health Outreach">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">A Visit to Okorli FM </h5>
-                            <p class="card-text">Announced Our Purpose for the Outreach.</p>
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-map-marker-alt me-2"></i>
-                                <small class="text-muted">Greater Accra Region</small>
+            <div class="outreach-container">
+                <div class="outreach-carousel" id="outreachCarousel">
+                    <!-- Outreach 1 -->
+                    <div class="outreach-item">
+                        <div class="outreach-card card h-100">
+                            <img src="images/1.jpg" class="card-img-top" alt="Health Outreach">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">A Visit to Okorli FM </h5>
+                                <p class="card-text">Announced Our Purpose for the Outreach.</p>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-map-marker-alt me-2"></i>
+                                    <small class="text-muted">Greater Accra Region</small>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">September 2025</small>
                             </div>
                         </div>
-                        <div class="card-footer bg-white">
-                            <small class="text-muted">September 2025</small>
+                    </div>
+                    
+                    <!-- Outreach 2 -->
+                    <div class="outreach-item">
+                        <div class="outreach-card card h-100">
+                            <img src="images/2.jpg" class="card-img-top" alt="Community Outreach">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">Sege Public Basic Schools</h5>
+                                <p class="card-text">Imparted Public Basic Schools in Sege</p>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-map-marker-alt me-2"></i>
+                                    <small class="text-muted">Sege, Ada, Greater Accra</small>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">September 2025</small>
+                            </div>
                         </div>
                     </div>
+                    
+                    <div class="outreach-item">
+                        <div class="outreach-card card h-100">
+                            <img src="images/3.jpg" class="card-img-top" alt="Community Outreach">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">A Talk with Parents </h5>
+                                <p class="card-text">Transforming Lives Through Cognitive Restructuring and Motivational Interviewing.</p>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-map-marker-alt me-2"></i>
+                                    <small class="text-muted">Greater Accra Region</small>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">September 2025</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Add more outreach items here as needed -->
                 </div>
                 
-                <!-- Outreach 2 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="outreach-card card h-100">
-                        <img src="images/2.jpg" class="card-img-top" alt="Community Outreach">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Sege Public Basic Schools</h5>
-                            <p class="card-text">Imparted Public Basic Schools in Sege</p>
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-map-marker-alt me-2"></i>
-                                <small class="text-muted">Sege, Ada, Greater Accra</small>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-white">
-                            <small class="text-muted">September 2025</small>
-                        </div>
-                    </div>
-                </div>
+                <button class="outreach-nav outreach-prev" id="outreachPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="outreach-nav outreach-next" id="outreachNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
                 
-                <div class="col-md-6 col-lg-4">
-                    <div class="outreach-card card h-100">
-                        <img src="images/3.jpg" class="card-img-top" alt="Community Outreach">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">A Talk with Parents </h5>
-                            <p class="card-text">Transforming Lives Through Cognitive Restructuring and Motivational Interviewing.</p>
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-map-marker-alt me-2"></i>
-                                <small class="text-muted">Greater Accra Region</small>
-                            </div>
-                        </div>
-                        <div class="card-footer bg-white">
-                            <small class="text-muted">September 2025</small>
-                        </div>
-                    </div>
+                <div class="outreach-indicators" id="outreachIndicators">
+                    <!-- Indicators will be generated by JavaScript -->
                 </div>
             </div>
+            
             <div class="text-center mt-5">
                 <a href="#" class="btn btn-union">View All Outreaches</a>
             </div>
@@ -911,13 +1419,13 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="bg-light">
+    <section id="contact" class="section-alt">
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-8 text-center">
                     <h2 class="display-5 fw-bold">Contact Us</h2>
                     <div class="separator mx-auto mb-4"></div>
-                    <p>We'd love to hear from you! Reach out through any of these channels.</p>
+                    <p class="lead">We'd love to hear from you! Reach out through any of these channels.</p>
                 </div>
             </div>
             
@@ -1222,7 +1730,81 @@
             `;
             document.head.appendChild(style);
             
-            // Sidebar functionality
+            // Enhanced Dark/Light Mode Toggle with Door Animation
+            const themeToggle = document.getElementById('themeToggle');
+            const door = document.getElementById('door');
+            const switchElement = document.getElementById('switch');
+            const hand = document.getElementById('hand');
+            const lightBulb = document.getElementById('lightBulb');
+            
+            // Check for saved theme preference or default to light
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            if (currentTheme === 'dark') {
+                switchElement.classList.add('off');
+                lightBulb.classList.add('off');
+            }
+            
+            let isAnimating = false;
+            
+            themeToggle.addEventListener('click', function() {
+                if (isAnimating) return;
+                isAnimating = true;
+                
+                // Open door
+                door.classList.add('open');
+                
+                // Show hand after a short delay
+                setTimeout(() => {
+                    hand.classList.add('active');
+                    
+                    // Toggle switch after hand appears
+                    setTimeout(() => {
+                        switchElement.classList.toggle('off');
+                        lightBulb.classList.toggle('off');
+                        
+                        // Hide hand
+                        setTimeout(() => {
+                            hand.classList.remove('active');
+                            
+                            // Close door
+                            setTimeout(() => {
+                                door.classList.remove('open');
+                                
+                                // Toggle theme after animation completes
+                                const currentTheme = document.documentElement.getAttribute('data-theme');
+                                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                                
+                                document.documentElement.setAttribute('data-theme', newTheme);
+                                localStorage.setItem('theme', newTheme);
+                                
+                                isAnimating = false;
+                            }, 500);
+                        }, 300);
+                    }, 500);
+                }, 300);
+            });
+            
+            // Back to top button functionality
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // SIDEBAR FUNCTIONALITY - THIS WAS MISSING!
             const sidebar = document.querySelector('.sidebar');
             const sidebarToggle = document.querySelector('.sidebar-toggle');
             const sidebarClose = document.querySelector('.sidebar-close');
@@ -1382,6 +1964,11 @@
                             top: targetElement.offsetTop - 80,
                             behavior: 'smooth'
                         });
+                        
+                        // Close sidebar if open
+                        sidebar.classList.remove('active');
+                        sidebarOverlay.classList.remove('active');
+                        document.body.style.overflow = 'auto';
                     }
                 });
             });
@@ -1404,6 +1991,134 @@
                         ripple.remove();
                     }, 600);
                 });
+            });
+            
+            // Outreach Carousel
+            const outreachCarousel = document.getElementById('outreachCarousel');
+            const outreachPrev = document.getElementById('outreachPrev');
+            const outreachNext = document.getElementById('outreachNext');
+            const outreachIndicators = document.getElementById('outreachIndicators');
+            const outreachItems = document.querySelectorAll('.outreach-item');
+            
+            let currentOutreachIndex = 0;
+            let autoSlideInterval;
+            
+            // Create indicators
+            outreachItems.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.classList.add('outreach-indicator');
+                if (index === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => goToOutreachSlide(index));
+                outreachIndicators.appendChild(indicator);
+            });
+            
+            // Update carousel position
+            function updateOutreachCarousel() {
+                const itemWidth = outreachItems[0].offsetWidth;
+                outreachCarousel.style.transform = `translateX(-${currentOutreachIndex * itemWidth}px)`;
+                
+                // Update indicators
+                document.querySelectorAll('.outreach-indicator').forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentOutreachIndex);
+                });
+            }
+            
+            // Go to specific slide
+            function goToOutreachSlide(index) {
+                currentOutreachIndex = index;
+                updateOutreachCarousel();
+                resetAutoSlide();
+            }
+            
+            // Next slide
+            function nextOutreachSlide() {
+                currentOutreachIndex = (currentOutreachIndex + 1) % outreachItems.length;
+                updateOutreachCarousel();
+            }
+            
+            // Previous slide
+            function prevOutreachSlide() {
+                currentOutreachIndex = (currentOutreachIndex - 1 + outreachItems.length) % outreachItems.length;
+                updateOutreachCarousel();
+            }
+            
+            // Auto slide for desktop
+            function startAutoSlide() {
+                // ADJUSTMENT: Change the 4000 value below to adjust the auto-rotation timing (in milliseconds)
+                autoSlideInterval = setInterval(nextOutreachSlide, 4000); // 4 seconds by default
+            }
+            
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+            
+            // Touch events for mobile
+            let startX = 0;
+            let endX = 0;
+            
+            outreachCarousel.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                clearInterval(autoSlideInterval); // Pause auto slide during touch
+            });
+            
+            outreachCarousel.addEventListener('touchmove', (e) => {
+                endX = e.touches[0].clientX;
+            });
+            
+            outreachCarousel.addEventListener('touchend', () => {
+                const diff = startX - endX;
+                const threshold = 50; // Minimum swipe distance
+                
+                if (Math.abs(diff) > threshold) {
+                    if (diff > 0) {
+                        nextOutreachSlide();
+                    } else {
+                        prevOutreachSlide();
+                    }
+                }
+                
+                startAutoSlide(); // Resume auto slide after touch
+            });
+            
+            // Button events
+            outreachPrev.addEventListener('click', () => {
+                prevOutreachSlide();
+                resetAutoSlide();
+            });
+            
+            outreachNext.addEventListener('click', () => {
+                nextOutreachSlide();
+                resetAutoSlide();
+            });
+            
+            // Initialize carousel
+            updateOutreachCarousel();
+            
+            // Start auto slide only on desktop
+            if (window.innerWidth > 768) {
+                startAutoSlide();
+            }
+            
+            // Pause auto slide on hover
+            outreachCarousel.addEventListener('mouseenter', () => {
+                clearInterval(autoSlideInterval);
+            });
+            
+            outreachCarousel.addEventListener('mouseleave', () => {
+                if (window.innerWidth > 768) {
+                    startAutoSlide();
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                updateOutreachCarousel();
+                clearInterval(autoSlideInterval);
+                
+                if (window.innerWidth > 768) {
+                    startAutoSlide();
+                }
             });
         });
     </script>
