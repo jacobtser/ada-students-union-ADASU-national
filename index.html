@@ -33,16 +33,16 @@
         }
 
         [data-theme="dark"] {
-            --bg-color: #1a1a1a; /* Lighter dark background */
-            --text-color: #f0f0f0; /* Brighter text */
-            --card-bg: #2d2d2d; /* Lighter cards */
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --card-bg: #2d2d2d;
             --header-bg: linear-gradient(135deg, #0d1b2a, #1b263b);
             --footer-bg: linear-gradient(135deg, #0d1b2a, #1b263b);
             --light: #3d3d3d;
-            --section-bg: #222222; /* Lighter section background */
+            --section-bg: #222222;
             --border-color: #444444;
             --shadow: 0 10px 30px rgba(0,0,0,0.3);
-            --text-muted: #b0b0b0; /* Brighter muted text */
+            --text-muted: #b0b0b0;
         }
 
         body {
@@ -50,7 +50,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
-            transition: margin-left 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+            transition: background-color 0.5s ease, color 0.5s ease;
             line-height: 1.7;
         }
 
@@ -73,145 +73,78 @@
             color: var(--text-color);
         }
 
-        /* Enhanced Dark/Light Mode Toggle with Door Animation */
+        /* SIMPLIFIED Dark/Light Mode Toggle - Bulb with On/Off Buttons */
         .theme-toggle-container {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1002;
-            perspective: 1000px;
-        }
-
-        .theme-toggle {
-            position: relative;
-            width: 80px;
-            height: 120px;
-            cursor: pointer;
-        }
-
-        .light-switch-box {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 60px;
-            height: 100px;
-            background: linear-gradient(145deg, #8B4513, #A0522D);
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            overflow: hidden;
-            transform-style: preserve-3d;
-        }
-
-        .door {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(145deg, #654321, #8B4513);
-            border-radius: 8px;
-            transform-origin: left;
-            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            box-shadow: 5px 0 15px rgba(0,0,0,0.3);
-            z-index: 2;
-        }
-
-        .door.open {
-            transform: rotateY(-80deg);
-        }
-
-        .door-handle {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            width: 8px;
-            height: 20px;
-            background: #D4AF37;
-            border-radius: 4px;
-            transform: translateY(-50%);
-        }
-
-        .switch-container {
-            position: absolute;
-            top: 30px;
-            left: 15px;
-            width: 30px;
-            height: 50px;
-            background: #2c3e50;
-            border-radius: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            padding: 5px 0;
-            z-index: 1;
+            gap: 10px;
         }
 
-        .switch {
-            width: 20px;
-            height: 20px;
-            background: #f1c40f;
-            border-radius: 50%;
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            box-shadow: 0 0 10px rgba(241, 196, 15, 0.7);
-        }
-
-        .switch.off {
-            transform: translateY(30px);
-            background: #7a7a7a;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
-        }
-
-        .hand {
-            position: absolute;
-            width: 40px;
-            height: 60px;
-            background: #f5d0b5;
-            border-radius: 20px 20px 10px 10px;
-            top: 30px;
-            right: -30px;
-            transform: translateX(100px);
-            transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            z-index: 3;
+        .bulb-container {
+            position: relative;
+            width: 60px;
+            height: 80px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
-        .hand.active {
-            transform: translateX(0);
-        }
-
-        .finger {
-            width: 6px;
-            height: 20px;
-            background: #f5d0b5;
-            border-radius: 3px;
-            position: absolute;
-            top: 10px;
-        }
-
-        .finger-1 { right: 10px; transform: rotate(10deg); }
-        .finger-2 { right: 17px; }
-        .finger-3 { right: 24px; }
-        .finger-4 { right: 31px; transform: rotate(-10deg); }
-
-        .light-bulb {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 30px;
+        .bulb {
+            width: 40px;
+            height: 40px;
             background: #f1c40f;
             border-radius: 50%;
             box-shadow: 0 0 20px rgba(241, 196, 15, 0.7);
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
         }
 
-        .light-bulb.off {
+        .bulb.off {
             background: #7a7a7a;
             box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+
+        .bulb-base {
+            width: 20px;
+            height: 15px;
+            background: #7a7a7a;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .theme-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .theme-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 45px;
+        }
+
+        .theme-btn.on {
+            background: #27ae60;
+            color: white;
+        }
+
+        .theme-btn.off {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .theme-btn.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
 
         /* Enhanced Button Styles */
@@ -240,50 +173,6 @@
 
         .btn-union:active {
             transform: translateY(0) scale(0.98);
-        }
-
-        .btn-union::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.7s;
-        }
-
-        .btn-union:hover::before {
-            left: 100%;
-        }
-
-        .btn-union::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-
-        .btn-union:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(20, 20);
-                opacity: 0;
-            }
         }
 
         /* Enhanced Card Styles */
@@ -319,7 +208,7 @@
 
         /* Enhanced Section Styles */
         section {
-            padding: 100px 0;
+            padding: 80px 0;
             position: relative;
             background-color: var(--section-bg);
             transition: background-color 0.5s ease;
@@ -349,7 +238,7 @@
         }
 
         .sidebar-header {
-            padding: 30px 20px 20px;
+            padding: 25px 20px 20px;
             text-align: center;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 20px;
@@ -381,17 +270,19 @@
         }
 
         .sidebar-logo {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
             border-radius: 50%;
             border: 3px solid white;
             margin-bottom: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background-color: white;
+            padding: 8px;
         }
 
         .sidebar-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0;
             font-family: var(--font-heading);
@@ -410,7 +301,7 @@
 
         .sidebar-menu a {
             display: block;
-            padding: 14px 20px;
+            padding: 12px 20px;
             color: rgba(255,255,255,0.9);
             text-decoration: none;
             transition: all 0.3s ease;
@@ -444,7 +335,7 @@
         }
 
         .sidebar-section-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 15px;
             padding-bottom: 10px;
@@ -456,8 +347,8 @@
         .sidebar-executive-card {
             background: rgba(255,255,255,0.05);
             border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 12px;
+            margin-bottom: 12px;
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -468,12 +359,12 @@
         }
 
         .sidebar-executive-img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
             border-radius: 50%;
             float: left;
-            margin-right: 15px;
+            margin-right: 12px;
             border: 2px solid var(--secondary);
         }
 
@@ -482,10 +373,11 @@
             margin-bottom: 5px;
             font-family: var(--font-primary);
             color: white;
+            font-size: 0.9rem;
         }
 
         .sidebar-executive-role {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--secondary);
             margin-bottom: 5px;
             font-family: var(--font-primary);
@@ -493,6 +385,7 @@
 
         .sidebar-executive-card small {
             color: rgba(255,255,255,0.7);
+            font-size: 0.75rem;
         }
 
         /* Sidebar Toggle Button */
@@ -504,8 +397,8 @@
             background: var(--primary);
             color: white;
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -513,7 +406,7 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .sidebar-toggle:hover {
@@ -546,7 +439,7 @@
             color: white;
             position: relative;
             overflow: hidden;
-            padding: 120px 0;
+            padding: 100px 0;
         }
 
         /* Particle Background */
@@ -572,18 +465,20 @@
         }
 
         .logo-img {
-            width: 300px;
-            height: 280px;
-            object-fit: cover;
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
             border: 3px solid white;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: all 0.5s ease;
             border-radius: 50%;
+            background-color: white;
+            padding: 15px;
         }
 
         .header-content {
             text-align: left;
-            padding-left: 30px;
+            padding-left: 25px;
         }
 
         /* Outreach Gallery - Carousel Style */
@@ -603,18 +498,6 @@
             flex: 0 0 33.333%;
             padding: 0 15px;
             transition: transform 0.3s ease;
-        }
-
-        @media (max-width: 992px) {
-            .outreach-item {
-                flex: 0 0 50%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .outreach-item {
-                flex: 0 0 100%;
-            }
         }
 
         .outreach-card {
@@ -642,8 +525,8 @@
             background: rgba(0,0,0,0.7);
             color: white;
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -651,7 +534,7 @@
             cursor: pointer;
             z-index: 10;
             transition: all 0.3s ease;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .outreach-nav:hover {
@@ -674,8 +557,8 @@
         }
 
         .outreach-indicator {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: #ddd;
             margin: 0 5px;
@@ -709,7 +592,7 @@
 
         .contact-form .form-control {
             border-radius: 12px;
-            padding: 15px;
+            padding: 12px;
             border: 2px solid var(--border-color);
             transition: all 0.3s ease;
             background: var(--card-bg);
@@ -727,19 +610,19 @@
             background: var(--footer-bg);
             color: white;
             position: relative;
-            padding: 80px 0 120px;
+            padding: 60px 0 80px;
         }
 
         /* Developer Attribution */
         .developer-attribution {
             text-align: center;
             padding: 20px 0;
-            margin-top: 40px;
+            margin-top: 30px;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .developer-name {
-            font-size: 1rem;
+            font-size: 0.9rem;
             margin-bottom: 5px;
             font-family: var(--font-primary);
             color: white;
@@ -747,29 +630,29 @@
 
         /* Social Icons */
         .social-icon {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
-            margin: 0 5px;
+            margin: 0 4px;
             transition: all 0.3s ease;
             color: white;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .social-icon:hover {
             background: var(--secondary);
-            transform: translateY(-5px) scale(1.1);
+            transform: translateY(-3px) scale(1.1);
         }
 
         /* Separator */
         .separator {
-            height: 4px;
-            width: 100px;
+            height: 3px;
+            width: 80px;
             background: var(--secondary);
             margin: 0 auto 20px;
             border-radius: 2px;
@@ -777,8 +660,8 @@
 
         /* Icon Container */
         .icon-container {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             background: rgba(52, 152, 219, 0.1);
             border-radius: 50%;
             display: inline-flex;
@@ -817,7 +700,7 @@
         /* Logo Animation */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
         }
 
         .floating {
@@ -848,7 +731,61 @@
             pointer-events: none;
         }
 
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
         /* Enhanced Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .outreach-item {
+                flex: 0 0 50%;
+            }
+            
+            .logo-img {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .header-content {
+                padding-left: 20px;
+            }
+            
+            h1 {
+                font-size: 2.3rem;
+            }
+            
+            h2 {
+                font-size: 1.9rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
@@ -858,13 +795,14 @@
             .sidebar-toggle {
                 top: 15px;
                 left: 15px;
-                width: 45px;
-                height: 45px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
 
             .logo-img {
-                width: 200px;
-                height: 200px;
+                width: 150px;
+                height: 150px;
             }
 
             .logo-container {
@@ -879,11 +817,15 @@
             }
 
             header {
-                padding: 80px 0;
+                padding: 70px 0;
             }
 
             section {
-                padding: 60px 0;
+                padding: 50px 0;
+            }
+
+            .outreach-item {
+                flex: 0 0 100%;
             }
 
             .outreach-card {
@@ -899,27 +841,25 @@
                 right: 15px;
             }
 
-            .theme-toggle {
+            .bulb-container {
                 transform: scale(0.8);
-                transform-origin: top right;
             }
 
             .btn-union {
                 padding: 12px 24px;
+                font-size: 0.9rem;
             }
 
             h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
 
             h2 {
-                font-size: 1.8rem;
+                font-size: 1.7rem;
             }
-        }
-
-        @media (max-width: 576px) {
-            .theme-toggle {
-                transform: scale(0.7);
+            
+            .lead {
+                font-size: 1.1rem;
             }
             
             .outreach-nav {
@@ -929,9 +869,98 @@
             }
             
             .social-icon {
+                width: 38px;
+                height: 38px;
+                margin: 0 3px;
+            }
+            
+            .icon-container {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .icon-container i {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .bulb-container {
+                transform: scale(0.7);
+            }
+            
+            .theme-buttons {
+                flex-direction: column;
+                gap: 3px;
+            }
+            
+            .theme-btn {
+                padding: 5px 10px;
+                font-size: 0.7rem;
+                min-width: 40px;
+            }
+            
+            .sidebar-logo {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .sidebar-title {
+                font-size: 1rem;
+            }
+            
+            .sidebar-menu a {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .sidebar-executive-card {
+                padding: 10px;
+            }
+            
+            .sidebar-executive-img {
+                width: 45px;
+                height: 45px;
+                margin-right: 10px;
+            }
+            
+            .sidebar-executive-name {
+                font-size: 0.85rem;
+            }
+            
+            .back-to-top {
                 width: 40px;
                 height: 40px;
-                margin: 0 3px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            footer {
+                padding: 40px 0 60px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .logo-img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .header-content {
+                padding: 0 10px;
+            }
+            
+            .btn-union {
+                padding: 10px 20px;
+                font-size: 0.85rem;
             }
         }
 
@@ -991,61 +1020,18 @@
         [data-theme="dark"] footer a:hover {
             color: white;
         }
-
-        /* Back to top button */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            background: var(--accent);
-            transform: translateY(-5px);
-        }
     </style>
-
-    
 </head>
 <body>
-    <!-- Enhanced Dark/Light Mode Toggle with Door Animation -->
+    <!-- SIMPLIFIED Dark/Light Mode Toggle - Bulb with On/Off Buttons -->
     <div class="theme-toggle-container">
-        <div class="theme-toggle" id="themeToggle">
-            <div class="light-switch-box">
-                <div class="door" id="door">
-                    <div class="door-handle"></div>
-                </div>
-                <div class="switch-container">
-                    <div class="switch" id="switch"></div>
-                </div>
-                <div class="hand" id="hand">
-                    <div class="finger finger-1"></div>
-                    <div class="finger finger-2"></div>
-                    <div class="finger finger-3"></div>
-                    <div class="finger finger-4"></div>
-                    <div class="finger finger-5"></div>
-                </div>
-            </div>
-            <div class="light-bulb" id="lightBulb"></div>
+        <div class="bulb-container">
+            <div class="bulb" id="bulb"></div>
+            <div class="bulb-base"></div>
+        </div>
+        <div class="theme-buttons">
+            <button class="theme-btn on" id="themeOn">ON</button>
+            <button class="theme-btn off" id="themeOff">OFF</button>
         </div>
     </div>
 
@@ -1054,7 +1040,6 @@
         <i class="fas fa-chevron-up"></i>
     </div>
 
-    <!-- Rest of the HTML remains the same but with improved classes for dark mode compatibility -->
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
@@ -1105,7 +1090,6 @@
                 </div>
             </div>
 
-
             <div class="sidebar-executive-card">
                 <img src="images/A_General_Secretary.jpg" alt="General Secretary" class="sidebar-executive-img">
                 <div>
@@ -1142,7 +1126,6 @@
                 </div>
             </div>
 
-
             <div class="sidebar-executive-card">
                 <img src="images/A_Organiser.jpg" alt="Organizing Secretary" class="sidebar-executive-img">
                 <div>
@@ -1152,7 +1135,6 @@
                 </div>
             </div>
 
-
             <div class="sidebar-executive-card">
                 <img src="images/PRO.png" alt="PRO" class="sidebar-executive-img">
                 <div>
@@ -1161,8 +1143,6 @@
                     <small>Accra Technical University (ATU)</small>
                 </div>
             </div>
-
-
 
             <div class="sidebar-executive-card">
                 <img src="images/no.png" alt="Organizing Secretary" class="sidebar-executive-img">
@@ -1183,13 +1163,9 @@
             </div>
         </div>
             
-            <!-- Other executive cards remain the same -->
-            <!-- ... -->
-            
-                <!-- Vision Content -->
+        <!-- Vision Content -->
         <div class="sidebar-content" id="vision">
             <h4 class="sidebar-section-title">Our Vision</h4>
-            <!-- REPLACE THIS CONTENT WITH YOUR VISION -->
             <p>To be the leading student union that empowers every ADA student to achieve academic excellence, personal growth, and community impact.</p>
             <p>We envision a united student body that actively contributes to the development of our communities while fostering a culture of innovation, leadership, and service.</p>
         </div>
@@ -1197,7 +1173,6 @@
         <!-- Mission Content -->
         <div class="sidebar-content" id="mission">
             <h4 class="sidebar-section-title">Our Mission</h4>
-            <!-- REPLACE THIS CONTENT WITH YOUR MISSION -->
             <p>The ADA Students Union is committed to:</p>
             <ul>
                 <li>Representing student interests at all levels</li>
@@ -1212,7 +1187,6 @@
         <!-- Constitution Content -->
         <div class="sidebar-content" id="constitution">
             <h4 class="sidebar-section-title">Constitution</h4>
-            <!-- REPLACE THIS CONTENT WITH YOUR CONSTITUTION DETAILS -->
             <p>Our constitution guides our operations and ensures transparency and accountability in all our activities.</p>
             <a href="https://drive.google.com/file/d/1jpZGf-EzeXyzaA0CcrbqJdybt74iaNQY/view?usp=drive_link" class="btn btn-union btn-sm mt-2">Download Constitution (PDF)</a>
         </div>
@@ -1220,7 +1194,6 @@
         <!-- Events Content -->
         <div class="sidebar-content" id="events">
             <h4 class="sidebar-section-title">Upcoming Events</h4>
-            <!-- REPLACE THIS CONTENT WITH YOUR EVENTS -->
             <div class="event-item mb-3">
                 <div class="event-date bg-primary text-white p-2 rounded text-center" style="width: 60px;">
                     <div class="fw-bold"></div>
@@ -1249,7 +1222,6 @@
         <!-- Resources Content -->
         <div class="sidebar-content" id="resources">
             <h4 class="sidebar-section-title">Student Resources</h4>
-            <!-- REPLACE THIS CONTENT WITH YOUR RESOURCES -->
             <ul>
                 <li><a href="https://chat.whatsapp.com/IC1addEaFL6L6992eMEbMA" class="text-white">Scholarship Opportunities</a></li>
                 <li><a href="https://www.funadvice.com/dir/education/Academic+Support" class="text-white">Academic Support</a></li>
@@ -1396,8 +1368,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Add more outreach items here as needed -->
                 </div>
                 
                 <button class="outreach-nav outreach-prev" id="outreachPrev">
@@ -1412,11 +1382,6 @@
                 </div>
             </div>
             
-            <div class="text-center mt-5">
-                <a href="#" class="btn btn-union">View All Outreaches</a>
-            </div>
-        </div>
-    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="section-alt">
@@ -1477,7 +1442,6 @@
                     <div class="card border-0 shadow-sm contact-form-card">
                         <div class="card-body p-4 p-md-5">
                             <h4 class="fw-bold mb-4 text-center">Send Us a Message</h4>
-                            <!-- REPLACE THE ACTION URL WITH YOUR FORMSPREE URL -->
                             <form class="contact-form" action="https://formspree.io/f/mqaylppl" method="POST">
                                 <div class="row g-3">
                                     <div class="col-md-6">
@@ -1504,7 +1468,7 @@
                                 </div>
                                 <div class="form-success mt-3">
                                     <i class="fas fa-check-circle fa-2x"></i>
-                                    <p class="mt-2">Your message has been sent successfully!</p>
+                                    <p class="mt-2">Thank you for the message! You will hear from us. O pee nɔ̃́! O mãã nũ wa he. </p>
                                 </div>
                                 <div class="form-error mt-3">
                                     <i class="fas fa-exclamation-circle fa-2x"></i>
@@ -1526,7 +1490,6 @@
                     <h5 class="fw-bold mb-3">ADA Students Union (ADASU) - National</h5>
                     <p>Empowering student voices, fostering community, and driving positive change in ADA Communities</p>
                     <div class="social-icons mt-4">
-                        <!-- Social Media Handles for the Union -->
                         <a href="https://www.facebook.com/adasunational" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://twitter.com/adasu_national" class="social-icon"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
@@ -1567,7 +1530,6 @@
             <div class="developer-attribution">
                 <p class="developer-name">Developed with 💖 by <a href="https://github.com/jacobtser?tab=repositories" target="_blank" class="text-white">Jacob Tser Doku</a></p>
                 <div class="mt-2">
-                    <!-- Developer Social Media Handles -->
                     <a href="https://www.linkedin.com/in/jacob-tser-doku-1360a8202/" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                     <a href="https://wa.me/233559499007" class="social-icon"><i class="fab fa-whatsapp"></i></a>
                     <a href="https://x.com/JacobTser418?t=Z3mEj_NGcHTF4Ae_3PR9aw&s=08" class="social-icon"><i class="fab fa-twitter"></i></a>
@@ -1592,12 +1554,46 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     
     <script>
-        // Initialize particles.js
         document.addEventListener('DOMContentLoaded', function() {
+            // SIMPLIFIED Dark/Light Mode Toggle
+            const bulb = document.getElementById('bulb');
+            const themeOn = document.getElementById('themeOn');
+            const themeOff = document.getElementById('themeOff');
+            
+            // Check for saved theme preference or default to light
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            // Update button states based on current theme
+            function updateThemeButtons() {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                bulb.classList.toggle('off', isDark);
+                themeOn.classList.toggle('active', !isDark);
+                themeOff.classList.toggle('active', isDark);
+            }
+            
+            // Set initial button states
+            updateThemeButtons();
+            
+            // Light mode button
+            themeOn.addEventListener('click', function() {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                updateThemeButtons();
+            });
+            
+            // Dark mode button
+            themeOff.addEventListener('click', function() {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeButtons();
+            });
+            
+            // Initialize particles.js
             particlesJS('particles-js', {
                 "particles": {
                     "number": {
-                        "value": 80,
+                        "value": 60,
                         "density": {
                             "enable": true,
                             "value_area": 800
@@ -1614,7 +1610,7 @@
                         }
                     },
                     "opacity": {
-                        "value": 0.09,  // Super transparent
+                        "value": 0.09,
                         "random": true,
                         "anim": {
                             "enable": true,
@@ -1637,7 +1633,7 @@
                         "enable": true,
                         "distance": 150,
                         "color": "#ffffff",
-                        "opacity": 0.9,  // Very faint lines
+                        "opacity": 0.9,
                         "width": 1
                     },
                     "move": {
@@ -1685,13 +1681,12 @@
             
             // Custom super transparent particles
             const customParticles = document.getElementById('custom-particles');
-            const particleCount = 30;
+            const particleCount = 25;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                // Random properties
                 const size = Math.random() * 10 + 5;
                 const posX = Math.random() * 100;
                 const posY = Math.random() * 100;
@@ -1704,7 +1699,7 @@
                 particle.style.top = `${posY}%`;
                 particle.style.animationDelay = `${delay}s`;
                 particle.style.animationDuration = `${duration}s`;
-                particle.style.opacity = Math.random() * 0.1 + 0.05; // Super transparent (5-15% opacity)
+                particle.style.opacity = Math.random() * 0.1 + 0.05;
                 
                 customParticles.appendChild(particle);
             }
@@ -1730,62 +1725,6 @@
             `;
             document.head.appendChild(style);
             
-            // Enhanced Dark/Light Mode Toggle with Door Animation
-            const themeToggle = document.getElementById('themeToggle');
-            const door = document.getElementById('door');
-            const switchElement = document.getElementById('switch');
-            const hand = document.getElementById('hand');
-            const lightBulb = document.getElementById('lightBulb');
-            
-            // Check for saved theme preference or default to light
-            const currentTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            
-            if (currentTheme === 'dark') {
-                switchElement.classList.add('off');
-                lightBulb.classList.add('off');
-            }
-            
-            let isAnimating = false;
-            
-            themeToggle.addEventListener('click', function() {
-                if (isAnimating) return;
-                isAnimating = true;
-                
-                // Open door
-                door.classList.add('open');
-                
-                // Show hand after a short delay
-                setTimeout(() => {
-                    hand.classList.add('active');
-                    
-                    // Toggle switch after hand appears
-                    setTimeout(() => {
-                        switchElement.classList.toggle('off');
-                        lightBulb.classList.toggle('off');
-                        
-                        // Hide hand
-                        setTimeout(() => {
-                            hand.classList.remove('active');
-                            
-                            // Close door
-                            setTimeout(() => {
-                                door.classList.remove('open');
-                                
-                                // Toggle theme after animation completes
-                                const currentTheme = document.documentElement.getAttribute('data-theme');
-                                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                                
-                                document.documentElement.setAttribute('data-theme', newTheme);
-                                localStorage.setItem('theme', newTheme);
-                                
-                                isAnimating = false;
-                            }, 500);
-                        }, 300);
-                    }, 500);
-                }, 300);
-            });
-            
             // Back to top button functionality
             const backToTop = document.getElementById('backToTop');
             
@@ -1804,7 +1743,7 @@
                 });
             });
             
-            // SIDEBAR FUNCTIONALITY - THIS WAS MISSING!
+            // SIDEBAR FUNCTIONALITY
             const sidebar = document.querySelector('.sidebar');
             const sidebarToggle = document.querySelector('.sidebar-toggle');
             const sidebarClose = document.querySelector('.sidebar-close');
@@ -1854,30 +1793,6 @@
                     document.getElementById(targetId).classList.add('active');
                 });
             });
-            
-            // Fix for executives button in header
-            const showExecutivesBtn = document.getElementById('show-executives');
-            if (showExecutivesBtn) {
-                showExecutivesBtn.addEventListener('click', function() {
-                    // Open sidebar
-                    sidebar.classList.add('active');
-                    sidebarOverlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                    
-                    // Remove active class from all menu items
-                    sidebarMenuItems.forEach(i => i.classList.remove('active'));
-                    
-                    // Add active class to executives menu item
-                    const executivesMenuItem = document.querySelector('.sidebar-menu a[data-target="executives"]');
-                    executivesMenuItem.classList.add('active');
-                    
-                    // Hide all content sections
-                    sidebarContents.forEach(content => content.classList.remove('active'));
-                    
-                    // Show executives content
-                    document.getElementById('executives').classList.add('active');
-                });
-            }
             
             // Fix for executives link in footer
             const footerExecutivesLink = document.getElementById('footer-executives');
@@ -1973,26 +1888,6 @@
                 });
             });
             
-            // Add ripple effect to buttons
-            const buttons = document.querySelectorAll('.btn-union');
-            buttons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    const x = e.clientX - e.target.getBoundingClientRect().left;
-                    const y = e.clientY - e.target.getBoundingClientRect().top;
-                    
-                    const ripple = document.createElement('span');
-                    ripple.classList.add('ripple');
-                    ripple.style.left = `${x}px`;
-                    ripple.style.top = `${y}px`;
-                    
-                    this.appendChild(ripple);
-                    
-                    setTimeout(() => {
-                        ripple.remove();
-                    }, 600);
-                });
-            });
-            
             // Outreach Carousel
             const outreachCarousel = document.getElementById('outreachCarousel');
             const outreachPrev = document.getElementById('outreachPrev');
@@ -2044,8 +1939,7 @@
             
             // Auto slide for desktop
             function startAutoSlide() {
-                // ADJUSTMENT: Change the 4000 value below to adjust the auto-rotation timing (in milliseconds)
-                autoSlideInterval = setInterval(nextOutreachSlide, 4000); // 4 seconds by default
+                autoSlideInterval = setInterval(nextOutreachSlide, 4000);
             }
             
             function resetAutoSlide() {
@@ -2059,7 +1953,7 @@
             
             outreachCarousel.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].clientX;
-                clearInterval(autoSlideInterval); // Pause auto slide during touch
+                clearInterval(autoSlideInterval);
             });
             
             outreachCarousel.addEventListener('touchmove', (e) => {
@@ -2068,7 +1962,7 @@
             
             outreachCarousel.addEventListener('touchend', () => {
                 const diff = startX - endX;
-                const threshold = 50; // Minimum swipe distance
+                const threshold = 50;
                 
                 if (Math.abs(diff) > threshold) {
                     if (diff > 0) {
@@ -2078,7 +1972,7 @@
                     }
                 }
                 
-                startAutoSlide(); // Resume auto slide after touch
+                startAutoSlide();
             });
             
             // Button events
